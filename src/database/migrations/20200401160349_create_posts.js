@@ -1,10 +1,10 @@
 exports.up = function(knex) {
-  return knex.schema.createTable('post', function(table) {
+  return knex.schema.createTable('posts', function(table) {
     table.increments().primary();
 
     table.string('title').notNullable().defaultTo('');
     table.string('description').notNullable().defaultTo('');
-    table.string('image_url').notNullable();
+    table.string('img_url').notNullable();
     table.integer('likes').notNullable().defaultTo(0);
     table.integer('dislikes').notNullable().defaultTo(0);
     table.timestamps(true, true);

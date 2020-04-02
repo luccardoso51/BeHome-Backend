@@ -1,25 +1,25 @@
-const express     = require('express'),
-      crypto      = require('crypto'),
-      connection  = require('./database/connection'),  
-      routes  = express.Router();
+const express         = require('express'),
+      connection = require('./database/connection'),
+      UserController  = require('./controllers/UserController'),
+      PostController  = require('./controllers/PostController'),
+      routes          = express.Router();
 
-routes.get('/users', async(req, res) => {
-  const users = await connection('users').select('*');
+routes.get('/users', UserController.index);
+routes.post('/users', UserController.create);
 
-  return res.json(users);
+routes.get('/posts', PostController.index);
+routes.post('/posts', PostController.create);
+
+routes.get('/categories', async (req, res) => {
+  const categories = await connection('categories').select('*');
+  
+  return res.json(categories);
 });
 
-routes.post('/users', async (req, res) => {
-  const {name, email} = req.body;
-  const id = crypto.randomBytes(4).toString('HEX');
-
-  await connection('users').insert({
-    id,
-    name,
-    email
-  });
-
-  return res.json({ id });
+routes.get('/categories_posts', async (req, res) => {
+  const categories_posts = await connection('categories_posts').select('*');
+  
+  return res.json(categories_posts);
 });
 
 module.exports = routes;
