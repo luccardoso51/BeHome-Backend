@@ -4,6 +4,7 @@ exports.up = function(knex) {
 
     table.string('title').notNullable().defaultTo('');
     table.string('description').notNullable().defaultTo('');
+    table.string('content_url').notNullable();
     table.string('img_url').notNullable();
     table.integer('likes').notNullable().defaultTo(0);
     table.integer('dislikes').notNullable().defaultTo(0);
