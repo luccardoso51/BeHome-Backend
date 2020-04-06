@@ -1,5 +1,5 @@
-const crypto = require("crypto"),
-  connection = require("../database/connection");
+const crypto     = require("crypto"),
+      connection = require("../database/connection");
 
 module.exports = {
   async index(req, res) {
